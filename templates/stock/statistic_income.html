@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %} {% block title %}User List{% endblock title %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Order</a></li>
+              <li class="active">detail</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div
+        class="card-body"
+        style="display: flex; justify-content: space-between"
+      >
+        <h4 class="box-title">Doanh thu</h4>
+      </div>
+      <div >
+        <style>
+            th,td{
+                font-size: 10px;
+            }
+        </style>
+          <div class="row" style="display: flex;
+          justify-content: space-evenly;">
+          
+               <div class="col-md-11 pull-right">
+                  <div class="order-summary clearfix">
+                    <div class="section-title">
+                      <h3 class="title">Thống kê doanh thu</h3>
+                    </div>
+                    <table class="shopping-cart-table table">
+                      <thead>
+                        <tr>
+                          <th>Sản phẩm</th>
+                          <th>Giá nhập (kho)</th>                     
+                          <th>Số lượng (kho)</th>
+                          <th>Đơn vị (sp)</th>
+                          <th>Giá bán</th>
+                          <th>Số lượng bán</th>
+                          <th>Số lượng đặt</th>
+                          <th>Tổng tiền bán</th>
+                       
+                          <th>Thời gian nhập</th>
+            
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for rs in product_income %}
+                        <tr>
+                          {% for r in rs %}
+                          <td class="thumb">
+                            {% load myapptag %} {% reset r as r %}
+                            {{ r }}
+                        </td>
+                        {% endfor %}
+                         
+                         
+                        </tr>
+        
+                        {% endfor %}
+                      </tbody>
+                      
+                    </table>
+                  </div>
+                </div>
+          </div>
+        
+
+             
+            </div>
+          </div>
+
+       
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col-lg-8 -->
+</div>
+{% endblock content %}

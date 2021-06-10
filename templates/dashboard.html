@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+
+    <!-- Widgets  -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+          <div class="card">
+              <div class="card-body" style="background-color: blue">
+                  <div class="stat-widget-five">
+                      <div class="stat-icon dib flat-color-1">
+                          <i class="fa fa-shopping-cart"></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div class="stat-text"><span class="count" style="color: white">{{ order }}</span></div>
+                              <div class="stat-heading" style="color: white">Order</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+          <div class="card">
+              <div class="card-body" style="background-color: green">
+                  <div class="stat-widget-five">
+                      <div class="stat-icon dib flat-color-2">
+                          <i class="fa fa-list"></i>
+                      </div>
+                      <div class="stat-content" >
+                          <div class="text-left dib">
+                              <div class="stat-text" style="color: white"><span class="count">{{ product }}</span></div>
+                              <div class="stat-heading" style="color: white">Product</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+          <div class="card">
+              <div class="card-body" style="background-color: red">
+                  <div class="stat-widget-five">
+                      <div class="stat-icon dib flat-color-3">
+                          <i class="fa fa-user"></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div class="stat-text"><span class="count" style="color: white">{{ user_count }}</span></div>
+                              <div class="stat-heading" style="color: white">User</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+          <div class="card">
+              <div class="card-body" style="background-color: orchid">
+                  <div class="stat-widget-five">
+                      <div class="stat-icon dib flat-color-4">
+                          <i class="fa fa-users"></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div class="stat-text"><span class="count" style="color: white">{{ category }}</span></div>
+                              <div class="stat-heading" style="color: white">Category</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- /Widgets -->
+      
+  <div class="clearfix"></div>
+
+
+
+  {% endblock content %}

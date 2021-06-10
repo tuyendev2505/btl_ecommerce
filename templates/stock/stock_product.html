@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %} {% block title %}User List{% endblock title %}
+{%block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">store</a></li>
+              <li class="active">List</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div
+        class="card-body"
+        style="display: flex; justify-content: space-between"
+      >
+        <h4 class="box-title">Store List</h4>
+        <form
+          style="width: 60%; display: flex"
+          action="{% url 'product_in_stock' %}"
+          method="get"
+        >
+          {% csrf_token %}
+          <select
+            name="q-category"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            {% for category in category_child %}
+
+            <option value="{{category.id}}">{{category.title}}</option>
+
+            {% endfor%}
+          </select>
+          <input
+            type="text"
+            name="q-search"
+            placeholder="Nhập mặt hàng cần bán"
+            style="width: 100%; margin: 0 1rem"
+            class="form-control"
+          />
+
+          <button
+            class="btn btn-primary"
+            id="submit"
+            type="submit"
+            name="submit"
+          >
+            Tìm kiếm
+          </button>
+        </form>
+      </div>
+      <div class="card-body--">
+        <div class="table-stats order-table ov-h">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="serial">#</th>
+                <th>Tên sản phẩm</th>
+                <th>Đơn vị sản phẩm</th>
+                <th>Giá 1sp</th>
+                <th>Số lượng</th>
+                <th>Mã hoá đơn</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if user %} {% for product in product_in_stock %}
+              <tr>
+                <td class="serial">{{ forloop.counter }}</td>
+                {% if product.p_title is None %}
+                <td>{{ product.product.title }}</td>
+                {% else %}
+
+                <td>{{ product.p_title }}</td>
+                {% endif %}
+                <td>{{ product.unit }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.amount}}</td>
+                <td>{{ product.bill_code}}</td>
+                <td>
+                
+                  <a class="btn btn-danger" title="delete">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                  <a
+                    href="/stock/product_sale/{{ product.id }}"
+                    class="btn btn-success"
+                    title="edit"
+                  >
+                    <i class="fa fa-cart-plus"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td>No User Data</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-stats -->
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col-lg-8 -->
+</div>
+{% endblock content %}

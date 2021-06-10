@@ -1,0 +1,99 @@
+{% extends 'base/base.html' %} {% block title %}User List{% endblock title %}
+{%block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">store</a></li>
+              <li class="active">List</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div
+        class="card-body"
+        style="display: flex; justify-content: space-between"
+      >
+        <h4 class="box-title">Store List</h4>
+      </div>
+      <div class="card-body--">
+        <div class="table-stats order-table ov-h">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="serial">#</th>
+                <th>Tên sản phẩm</th>
+                <th>Đơn vị sản phẩm</th>
+                <th>Giá 1sp</th>
+                <th>Số lượng</th>
+                <th>Ảnh sản phẩm</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if user %} {% for product in product_sale_list %}
+              <tr>
+                <td class="serial">{{ forloop.counter }}</td>
+                {% if product.p_title is None %}
+                <td>{{ product.product.title }}</td>
+                {% else %}
+
+                <td>{{ product.p_title }}</td>
+                {% endif %}
+                <td>{{product.unit}}</td>
+                <td>{{ product.price_sale }}</td>
+                <td>{{ product.amount_sale}}</td>
+                <td>
+                  <img
+                    style="width: 50px; height: 50px"
+                    src="http://127.0.0.1:8000/uploads/{{product.image_sale}}"
+                  />
+                </td>
+                <td>
+                  <a href="/stock/update_product_sale/{{ product.id }}" class="btn btn-info" title="edit">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a
+                    class="btn btn-danger"
+                    title="delete"
+                    href="/stock/delete_product/{{ product.id }}"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </a>
+                 
+                </td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td>No User Data</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-stats -->
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col-lg-8 -->
+</div>
+{% endblock content %}

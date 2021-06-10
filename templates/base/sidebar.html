@@ -1,0 +1,147 @@
+<aside id="left-panel" class="left-panel" style="background: black">
+  <nav class="navbar navbar-expand-sm navbar-default" style="background: black">
+    <div
+      id="main-menu"
+      class="main-menu collapse navbar-collapse"
+      style="background: black"
+    >
+      <ul class="nav navbar-nav">
+        <li class="active" style="background: black">
+          <a href="{% url 'dashboard' %}"
+            ><i class="menu-icon fa fa-laptop"></i>Dashboard
+          </a>
+        </li>
+        <li class="menu-title" style="color: white">My Store</li>
+        <!-- /.menu-title -->
+        {% if request.session.role == 1 %}
+        <li class="menu-item-has-children dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="menu-icon fa fa-user"></i>Manage User</a
+          >
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="fa fa-plus-circle" style="color: darkblue"></i
+              ><a href="{% url 'add_user' %}">Add user</a>
+            </li>
+            <li>
+              <i class="fa fa-eye" style="color: darkblue"></i
+              ><a href="{% url 'user_list' %}">List User</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu-item-has-children dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="menu-icon fa fa-user"></i>Manage Category</a
+          >
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="fa fa-plus-circle" style="color: darkblue"></i
+              ><a href="{% url 'add_category' %}">Add Category</a>
+            </li>
+            <li>
+              <i class="fa fa-eye" style="color: darkblue"></i
+              ><a href="{% url 'category_list' %}">List category</a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        {% if request.session.role == 1 or request.session.role == 2 %}
+        <li class="menu-item-has-children dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="menu-icon fa fa-user"></i>Manage Product</a
+          >
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="fa fa-plus-circle" style="color: darkblue"></i
+              ><a href="{% url 'add_product' %}">Add product</a>
+            </li>
+            <li>
+              <i class="fa fa-eye" style="color: darkblue"></i
+              ><a href="{% url 'product_list' %}">List Product</a>
+            </li>
+          </ul>
+        </li>
+        {% endif%}
+        {% if request.session.role == 1 or request.session.role == 2 %}
+        <li class="menu-item-has-children">
+         <a href="{% url 'import_stock' %}">  <i class="menu-icon fa fa-user"></i>Import stock</a
+          ></a>
+        </li>
+        {% endif%}
+        {% if request.session.role == 1 or request.session.role == 2 or request.session.role == 3 %}
+        <li class="menu-item-has-children">
+         <a href="{% url 'product_in_stock' %}">  <i class="menu-icon fa fa-user"></i>List Product stock</a
+          ></a>
+        </li>
+        <li class="menu-item-has-children">
+         <a href="{% url 'product_sale_list' %}">  <i class="menu-icon fa fa-user"></i>List Product Sale</a
+          ></a>
+        </li>
+        {% endif%}
+       
+        <li class="menu-item-has-children dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="menu-icon fa fa-user"></i>Manage order</a
+          >
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="fa fa-plus-circle" style="color: darkblue"></i
+              ><a href="{% url 'orders_admin' %}">List order</a>
+            </li>
+           
+          </ul>
+        </li>
+        {% if request.session.role == 1 or request.session.role == 2 %}
+        <li class="menu-item-has-children dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="menu-icon fa fa-user"></i>Statistic</a
+          >
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="fa fa-plus-circle" style="color: darkblue"></i
+              ><a href="{% url 'statistic_inventory' %}">Statistic bill</a>
+            </li>
+            <li>
+              <i class="fa fa-eye" style="color: darkblue"></i
+              ><a href="{% url 'statistic_income' %}">Statistic income</a>
+            </li>
+           
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </nav>
+</aside>

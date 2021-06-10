@@ -1,0 +1,109 @@
+{% extends 'base/homebase.html' %}
+{% block title %} Shop Cart {% endblock %}
+
+{% block sidebar %} {% include 'components/sidebar.html' %} {% endblock %}
+
+{% block body %}
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li class="active">Shopcart</li>
+    </ul>
+  </div>
+</div>
+<!-- /BREADCRUMB -->
+<!-- section -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+       {% if shopcart %}
+       <div class="order-summary clearfix">
+        <div class="section-title">
+          <h3 class="title">Shopcart Product List</h3>
+        </div>
+        <table class="shopping-cart-table table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
+              <th class="text-right"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rs in shopcart %}
+            <tr>
+              <td  class="thumb">
+
+  
+   
+              </td>
+              <td class="details">
+                  <img  style="width: 50px;height: 50px;" src="{{rs.item.image_sale.url }}" alt="" />
+              </td>
+              <td class="price text-center">
+                <strong>
+                  {{rs.item.price_sale}}
+                </strong>
+              </td>
+              <td class="qty text-center">
+                <strong>{{rs.quantity}}</strong>
+              </td>
+              <td class="total text-center">
+                <strong 
+                  > {{ rs.amount }}đ 
+                </strong>
+              </td>
+              <td class="text-right">
+                <a
+                  href="/order/delete_from_cart/{{ rs.id }}"
+                  onclick="return confirm('Delete ! Are you sure?')"
+                  class="main-btn icon-btn"
+                  ><i class="fa fa-close"></i
+                ></a>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th>SHIPING</th>
+              <td colspan="2">Free Shipping</td>
+            </tr>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th>TOTAL</th>
+              <th colspan="2" class="sub-total">${{ total }}</th>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="pull-right">
+          <a href="{% url 'order_product' %}" class="primary-btn"
+            >Place Order</a
+          >
+        </div>
+      </div>
+      {% else %}
+      <div style="display: flex;justify-content: center;align-items: center; height: 40vh;flex-direction: column;">
+        <h3>Hiện bạn chưa có sản phẩm vui lòng chọn sản phẩm!</h3>
+        <button class="btn btn-info"><a style="color: #fff;" href="{% url 'home' %}">SHOPPING NOW</a></button>
+      </div>
+      {% endif %}
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /section -->
+
+{% endblock %}

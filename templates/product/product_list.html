@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %} {% block title %}User List{% endblock title %}
+{%block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Category</a></li>
+              <li class="active">List</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div
+        class="card-body"
+        style="display: flex; justify-content: space-between"
+      >
+        <h4 class="box-title">Category List</h4>
+        <form action="{% url 'product_list' %}" method="get">
+          <select
+            name="q"
+            id="form-s"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option value="---------------">---------------</option>
+
+            {% for category in category_list %}
+
+            <option value="{{category.id}}">{{category.title}}</option>
+
+            {% endfor%}
+          </select>
+          <!-- <input id="submit" type="submit" name="submit" value="Submit" /> -->
+        </form>
+      </div>
+      <div class="card-body--">
+        <div class="table-stats order-table ov-h">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="serial">#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if user %} {% for product in object_list %}
+              <tr>
+                <td class="serial">{{ forloop.counter }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.description }}</td>
+
+                <td>
+                  <a class="btn btn-info" title="edit">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a
+                    class="btn btn-danger"
+                    title="delete"
+                    href="/product/remove_product/{{ product.id }}"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td>No User Data</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-stats -->
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col-lg-8 -->
+</div>
+{% endblock content %}

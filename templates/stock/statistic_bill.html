@@ -1,0 +1,119 @@
+{% extends 'base/base.html' %} {% block title %}User List{% endblock title %}
+{%block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Order</a></li>
+              <li class="active">detail</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div
+        class="card-body"
+        style="display: flex; justify-content: space-between"
+      >
+        <h4 class="box-title">Hoá đơn</h4>
+      </div>
+      <div >
+       
+          <div class="row" style="display: flex;
+          justify-content: space-evenly;">
+          
+               <div class="col-md-11 pull-right">
+                  <div class="order-summary clearfix">
+                    <div class="section-title">
+                      <h3 class="title">Thống kê hoá đơn</h3>
+                    </div>
+                    <table class="shopping-cart-table table">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Mã hoá đơn</th>
+                          <th>Product</th>                     
+                          <th>Giá</th>
+                          <th>Số lượng</th>
+                       
+                          <th>Thời gian nhập</th>
+            
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for rs in bill %}
+                        <tr>
+                          <td class="thumb">
+                        
+                          </td>
+                          <td class="details">
+                           
+                            <strong> {{rs.bill_code}} </strong>
+                            
+                          </td>
+                          <td class="details">
+                           
+                            <strong> {{rs.product.title}} </strong>
+                            
+                          </td>
+                          
+                         
+                          <td class="qty ">
+                            <strong>{{rs.price}}/{{rs.unit}}</strong>
+                          </td>
+                         
+                          <td class="qty">
+                            <strong>{{rs.amount}}</strong>
+                          </td>
+                          <td class="qty">
+                            <strong>{{rs.created_at}}</strong>
+                          </td>
+                         
+                        </tr>
+        
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        
+                        <tr>
+                          <th class="empty" colspan="3"></th>
+                          <th>TOTAL</th>
+                          <th colspan="2" class="total">{{ total_bill }} Đ</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+          </div>
+        
+
+             
+            </div>
+          </div>
+
+       
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col-lg-8 -->
+</div>
+{% endblock content %}

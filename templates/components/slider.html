@@ -1,0 +1,27 @@
+{% load static %}
+<!-- HOME -->
+<div id="home">
+  <!-- container -->
+  <div class="container">
+    <!-- home wrap -->
+    <div class="home-wrap">
+      <!-- home slick -->
+      <div id="home-slick" style="width: 90%; margin: 3rem auto">
+        {% for rs in products_slider %}
+        <!-- banner -->
+        <div class="banner banner-1">
+          <img src="{{ rs.image_sale.url }}" alt="" style="height: 300px" />
+          <div class="banner-caption text-center">
+            <a class="primary-btn">Shop Now</a>
+          </div>
+        </div>
+        <!-- /banner -->
+        {% endfor %}
+      </div>
+      <!-- /home slick -->
+    </div>
+    <!-- /home wrap -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /HOME -->

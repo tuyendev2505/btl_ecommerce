@@ -1,0 +1,125 @@
+{% extends 'base/base.html' %} {% block title %}Add User{% endblock title %}
+{%block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="breadcrumbs-inner">
+    <div class="row m-0">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Product</a></li>
+              <li class="active">update</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock breadcrumbs %} {% block content %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <strong class="card-title">Update Item</strong>
+      </div>
+      <div class="card-body">
+        <!-- Credit Card -->
+        <div id="pay-invoice">
+          <div class="card-body">
+            <form
+              action="/stock/save_update_product/"
+              method="POST"
+              novalidate="novalidate"
+            >
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="title" class="control-label mb-1">Mã</label>
+                <input
+                  class="form-control col-4"
+                  value="{{item.detail_bill_id}}"
+                  name="id"
+                />
+              </div>
+              <div class="form-group">
+                <label for="title" class="control-label mb-1"
+                  >Tên sản phẩm</label
+                >
+                <input
+                  class="form-control col-4"
+                  value="{{item.title}}"
+                  name="title"
+                />
+              </div>
+
+              <!-- end -->
+
+              <div class="form-group">
+                <label for="price_sale" class="control-label mb-1"
+                  >Gía bán</label
+                >
+                <input
+                  class="form-control col-4"
+                  value="{{item.price_sale}}"
+                  name="price_sale"
+                />
+              </div>
+              <div class="form-group">
+                <label for="amount_sale" class="control-label mb-1"
+                  >Số lượng bán</label
+                >
+                <input
+                  class="form-control col-4"
+                  value="{{item.amount_sale}}"
+                  name="amount_sale"
+                />
+              </div>
+              <div class="form-group">
+                <label for="keywords" class="control-label mb-1"
+                  >Key words</label
+                >
+                <input
+                  class="form-control col-4"
+                  value="{{item.keywords}}"
+                  name="keywords"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="idescription" class="control-label mb-1"
+                  >Mô tả</label
+                >
+                <input
+                  class="form-control col-4"
+                  value="{{item.description}}"
+                  name="description"
+                />
+              </div>
+
+              <div class="col-4" style="margin: 2rem auto">
+                <button
+                  id="payment-button"
+                  type="submit"
+                  class="btn btn-lg btn-success btn-block"
+                >
+                  <span id="payment-button-amount">Save</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .card -->
+  </div>
+  <!--/.col-->
+</div>
+{% endblock content %}

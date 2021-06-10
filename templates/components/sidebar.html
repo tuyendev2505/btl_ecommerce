@@ -1,0 +1,160 @@
+{% load static %}
+
+<!-- NAVIGATION -->
+<div id="navigation">
+  <!-- container -->
+  <div class="container">
+    <div id="responsive-nav">
+      <!-- category nav -->
+      {% if page %}
+      <div class="category-nav">
+        {% else %}
+        <div class="category-nav show-on-click">
+          {% endif %}
+
+          <span
+            class="category-header"
+            style="background-color: #fff; color: #000; padding: 25px 15px"
+            >Categories<i class="fa fa-list"></i
+          ></span>
+
+          <ul class="category-list">
+            {% for category in categories %}
+            <li class="dropdown side-dropdown">
+              <a class="dropdown-toggle">{{ category.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- /category nav -->
+        <script>
+          $(function () {
+            $("#query").autocomplete({
+              source: "/search_auto/",
+              select: function (event, ui) {
+                //item selected
+                AutoCompleteSelectHandler(event, ui);
+              },
+              minLength: 2,
+            });
+          });
+
+          function AutoCompleteSelectHandler(event, ui) {
+            var selectedObj = ui.item;
+          }
+        </script>
+
+        <!-- menu nav -->
+        <div
+          class="menu-nav"
+          style="display: flex; justify-content: space-between"
+        >
+          <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+          <ul class="menu-list" style="display: flex; align-items: center">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li>
+              <a href="{% url 'contactus' %}">Contact Us</a>
+            </li>
+          </ul>
+          <!-- Search -->
+          <div class="header-search">
+            <form action="/search/" method="post">
+              {% csrf_token %}
+              <input
+                id="query"
+                name="query"
+                class="input search-input"
+                type="text"
+                placeholder="Enter your keyword"
+                style="padding-left: 10px; padding-right: 20px"
+              />
+              <button type="submit" class="search-btn">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
+          <!-- /Search -->
+          <div class="pull-right">
+            <ul class="header-btns" style="display: flex; align-items: center">
+              <!-- Account -->
+              <li
+                class="header-account dropdown default-dropdown"
+                style="color: #fff"
+              >
+                {% if user.id %}
+                <div
+                  class="dropdown-toggle"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="true"
+                >
+                  <div
+                    class="header-btns-icon"
+                    style="border: none; border-radius: 50%"
+                  >
+                    <img
+                      src="http://127.0.0.1:8000{{ request.session.userimage }}"
+                      style="height: 40px; width: 40px; border-radius: 50%"
+                    />
+                  </div>
+                  <strong class="text-uppercase" style="color: #fff"
+                    >{{ user.first_name }} <i class="fa fa-caret-down"></i
+                  ></strong>
+                </div>
+                {% else %}
+                <a
+                  href="{% url 'login' %}"
+                  class="text-uppercase"
+                  style="color: #fff"
+                  >Login</a
+                >
+                /
+                <a
+                  href="{% url 'signup' %}"
+                  class="text-uppercase"
+                  style="color: #fff"
+                  >Sign Up</a
+                >
+                {% endif %}
+
+                <ul class="custom-menu">
+                 
+                  <li>
+                    <a href="{% url 'user_orders' %}"><i class="fa fa-exchange"></i>My Orders</a>
+                  </li>
+                  
+                  <li>
+                    <a href="{% url 'logout' %}"
+                      ><i class="fa fa-unlock-alt"></i>Logout</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <!-- /Account -->
+
+              <!-- Cart -->
+              <li class="header-cart dropdown default-dropdown">
+                <a href="{% url 'shopcart'%}">
+                  <div class="header-btns-icon" style="border-radius: 50%">
+                    <i class="fa fa-shopping-cart"></i>
+                    {% load myapptags %} {% shopcartcount user.id as count %}
+                    <span class="qty">{{ count }}</span>
+                  </div>
+
+                  <br />
+                </a>
+              </li>
+              <!-- /Cart -->
+            </ul>
+          </div>
+        </div>
+        <!-- menu nav -->
+      </div>
+    </div>
+
+    <!-- /container -->
+  </div>
+  <!-- /NAVIGATION -->
+</div>
